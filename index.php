@@ -47,10 +47,19 @@
                       <tr class="bg-light">
                         <th><h4>Lager /Kommissionierer</h4></th>
 
-                        
+                        <?php
+                            $date = strtotime($jsonresponses[0]->attendences[0]->date);
+                            $week_number =  date("W", $date);
+                            for($i=0;$i<4;$i++){
+                        ?>
+                            
                         <th class="flex-column align-items-center">
+                          
                           <div class="d-flex align-items-center justify-content-center">
-                          KW1
+                          <?php 
+                            $calender_week= $week_number+$i;
+                            echo "KW".$calender_week;
+                          ?>
                           </div>
 
                           <div>
@@ -61,7 +70,7 @@
                             <label class="label label-success">Fr</label>
                           </div>
                         </th>
-                         
+                        <?php }?>
                       </tr>
                     </thead>
                     <!-- End Kalenderwoche -->
@@ -80,13 +89,13 @@
                               $timesheetsCount = count($timesheets);
                               if($timesheetsCount>0){
                                 $lastArray = $timesheets[$timesheetsCount-1];
-                                if(is_null($lastArray->checkOut)){
-                                  echo '<a class="btn btn-circle d-flex btn-success text-white" >';
+                                if($lastArray->checkOut == " "){
+                                  echo '<a class="btn btn-circle d-flex btn-success text-white">';
                                 }else{
-                                  echo '<a class="btn btn-circle d-flex btn-danger text-white" >';
+                                  echo '<a class="btn btn-circle d-flex btn-danger text-white">';
                                 }
                               }else { 
-                                echo '<a class="btn btn-circle d-flex btn-danger text-white" >';
+                                echo '<a class="btn btn-circle d-flex btn-danger text-white">';
                               }
                               echo $jsonresponse->nachname[0].$jsonresponse->vorname[0]; 
                              
